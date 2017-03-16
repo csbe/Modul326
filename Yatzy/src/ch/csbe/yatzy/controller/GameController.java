@@ -55,6 +55,11 @@ public class GameController {
 		game = new Game(new Player(p1), new Player(p2));
 	}
 
+	/**
+	 * The Rolling action which handles the roll of every dice
+	 * @param event could ignore
+	 * @throws IOException 
+	 */
 	public void roll(ActionEvent event) throws IOException {
 		game.roll();
 
@@ -65,11 +70,23 @@ public class GameController {
 		paintCheckings();
 	}
 
+	/**
+	 * The Play button action which handles the changes of the Tableaus
+	 * @param event could ignore
+	 * @throws IOException 
+	 */
 	public void play(ActionEvent event) throws IOException {
 		checkFinish();
 		game.changeTableau();
 	}
 
+	/**
+	 * Get the Node by the row and column index of a GridPane
+	 * @param row the row index value
+	 * @param column the column index value
+	 * @param gridyPane the GridPane in which should search
+	 * @return the founded Node or null 
+	 */
 	public Node getNodeByRowColumnIndex(final int row, final int column, GridPane gridyPane) {
 		Node result = null;
 		ObservableList<Node> childrens = gridyPane.getChildren();
@@ -85,6 +102,10 @@ public class GameController {
 		return result;
 	}
 
+	/**
+	 * Paint the CheckBoxes borders in the right GridPane when 
+	 * the value is matching. this is a helper method
+	 */
 	public void paintCheckings() {
 		for (int i = 0; i < 6; i++) {
 			if (!(getNodeByRowColumnIndex(1 + i, 2 + game.whichTableau(), gridPane) instanceof Label))
@@ -126,6 +147,12 @@ public class GameController {
 		}
 	}
 
+	/**
+	 * Paint and places the CheckBoxes in the GridPanes when 
+	 * there is no Label - also creates a ClickListener when the Checkbox is clicked
+	 * and set the Label with the calculated values
+	 *@return a CheckBox node
+	 */
 	public CheckBox generateCheckbox() {
 		CheckBox cb = new CheckBox();
 		cb.setOnAction(new EventHandler<ActionEvent>() {
@@ -245,6 +272,11 @@ public class GameController {
 		return cb;
 	}
 
+	/**
+	 * Check if game is finished 
+	 * when finished shows a Alert Box and informs the player about the winner and loads
+	 * the start scene
+	 */
 	public void checkFinish() {
 		if (game.getRound() >= 13) {
 			Tableau winner = (game.getTableaus().get(0).calculateTotal() > game.getTableaus().get(1).calculateTotal())
@@ -284,6 +316,9 @@ public class GameController {
 		}
 	}
 
+	/**
+	 * The First method after constructor which is called
+	 */
 	public void initialize() {
 		player1.setText(p1);
 		player2.setText(p2);
@@ -303,6 +338,9 @@ public class GameController {
 		turn.setText("It's your turn " + game.getActualTableau().getPlayer().getName());
 	}
 
+	/**
+	 * Paint the Dices in the ImageViews - this is a helper method
+	 */
 	public void paintDices() {
 		turn.setText("It's your turn " + game.getActualTableau().getPlayer().getName());
 		final ColorAdjust blackout = new ColorAdjust();

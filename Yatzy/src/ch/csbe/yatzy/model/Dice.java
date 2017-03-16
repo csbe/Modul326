@@ -4,11 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-import javax.persistence.Entity;
-
 import javafx.scene.image.Image;
 
-@Entity
 public class Dice implements Comparable<Dice> {
 
 	private int value = 0;

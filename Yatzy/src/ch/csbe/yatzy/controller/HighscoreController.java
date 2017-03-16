@@ -6,6 +6,9 @@ import java.util.Map;
 import ch.csbe.yatzy.helper.Serializer;
 import ch.csbe.yatzy.model.Highscore;
 import ch.csbe.yatzy.model.Player;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,9 +20,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-import javafx.beans.value.*;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
+import javafx.scene.control.TableColumn.CellDataFeatures;
+import javafx.beans.property.ReadOnlyObjectWrapper;
 
 public class HighscoreController {
 	@FXML
@@ -36,6 +38,14 @@ public class HighscoreController {
 	}
 
 	public void initialize() {
+		TableColumn idCol = new TableColumn("#");
+		idCol.setCellValueFactory(new Callback<CellDataFeatures<Player, Integer>, ObservableValue<String>>() {
+		  @Override public ObservableValue<String> call(CellDataFeatures<Player, Integer> p) {
+		    return new ReadOnlyObjectWrapper(table.getItems().indexOf(p.getValue()) + "");
+		  }
+		});   
+		idCol.setSortable(false);
+		
 		TableColumn<Map.Entry<Player, Integer>, String> column1 = new TableColumn<>("Player");
 		column1.setCellValueFactory(
 				new Callback<TableColumn.CellDataFeatures<Map.Entry<Player, Integer>, String>, ObservableValue<String>>() {
@@ -49,7 +59,7 @@ public class HighscoreController {
 						return new SimpleStringProperty(p.getValue().getKey().getName());
 					}
 				});
-		column1.setMinWidth(130);
+		column1.setMinWidth(90);
 		TableColumn<Map.Entry<Player, Integer>, String> column2 = new TableColumn<>("Score");
 		column2.setCellValueFactory(
 				new Callback<TableColumn.CellDataFeatures<Map.Entry<Player, Integer>, String>, ObservableValue<String>>() {
@@ -67,7 +77,7 @@ public class HighscoreController {
 			hs = new Highscore();
 		}
 		ObservableList<Map.Entry<Player, Integer>> items = FXCollections.observableArrayList(hs.result().entrySet());
-		table.getColumns().setAll(column1, column2);
+		table.getColumns().setAll(idCol, column1, column2);
 		table.setItems(items);
 	}
 }

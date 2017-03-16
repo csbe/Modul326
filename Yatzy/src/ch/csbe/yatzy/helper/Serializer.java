@@ -5,12 +5,15 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.List;
 
 import ch.csbe.yatzy.model.Highscore;
 
 public class Serializer {
 
+	/**
+	 * Save a Serialized Object into File highscore.ser
+	 * @param score is a Highscore object
+	 */
 	public static void save(Highscore score){
 		ObjectOutputStream oos = null;
 		FileOutputStream fout = null;
@@ -31,6 +34,10 @@ public class Serializer {
 		}
 	}
 	
+	/**
+	 * Load a Serialized Object from File highscore.ser
+	 * @return the loaded Highscore object
+	 */
 	public static Highscore load(){
 		ObjectInputStream objectinputstream = null;
 		FileInputStream streamIn = null;

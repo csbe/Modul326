@@ -10,7 +10,6 @@ public class Tableau {
 	private int four;
 	private int five;
 	private int six;
-	private int bonus;
 	private int thriple;
 	private int quatruple;
 	private int fullhouse;
@@ -74,10 +73,6 @@ public class Tableau {
 
 	public int getBonus() {
 		return (calculateUp()>=63)?25:0;
-	}
-
-	public void setBonus(int bonus) {
-		this.bonus = bonus;
 	}
 
 	public int getThriple() {

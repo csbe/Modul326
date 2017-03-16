@@ -19,6 +19,11 @@ public class GameHelper {
 
 	public static FIXEDPOINTS fixed;
 	
+	/**
+	 * Calculate the sum of Dice values
+	 * @param dices are a Map with all Dice Objects
+	 * @return the sum
+	 */
 	public static int calculateSum(Map<String, Dice> dices){
 		int sum = 0;
 		for(Dice d : dices.values()){
@@ -27,6 +32,13 @@ public class GameHelper {
 		return sum;
 	}
 	
+	/**
+	 * Calculate the sum of same values which occurences is count
+	 * @deprecated this method should not be used
+	 * @param dices are a Map with all Dice Objects 
+	 * @param count is the occurence for which should check 
+	 * @return the sum
+	 */
 	public static int calculateMore(Map<String, Dice> dices, int count){
 		List<Dice> diceslist = new ArrayList<Dice>(dices.values());
 		Collections.sort(diceslist);
@@ -42,7 +54,12 @@ public class GameHelper {
 	    return 0;
 	}
 	
-	
+	/**
+	 * Calculate the sum of same values occurences 
+	 * @param dices are a Map with all Dice Objects 
+	 * @param value is the value for which should calculate the occurences
+	 * @return the sum
+	 */
 	public static int calculate(Map<String, Dice> dices, int value){
 		int count = 0;
 		for(Dice d : dices.values()){
@@ -54,7 +71,12 @@ public class GameHelper {
 	}
 	
 	
-	
+	/**
+	 * Check if values occurences is same or bigger the count value
+	 * @param dices are a Map with all Dice Objects 
+	 * @param count is the value for which should check the occurences
+	 * @return true if occurence is same or bigger or false if occurence is smaller
+	 */
 	public static boolean isCount(Map<String, Dice> dices, int count) {
 		List<Dice> diceslist = new ArrayList<Dice>(dices.values());
 		Collections.sort(diceslist);
@@ -71,9 +93,12 @@ public class GameHelper {
 		return false;
 	}
 	
-
+	/**
+	 * Check if dices values give a FullHouse 2x of occurence and 3x of occurence
+	 * @param dices are a Map with all Dice Objects
+	 * @return true if FullHouse or false isnt
+	 */
 	public static boolean isFullHouse(Map<String, Dice> dices) {
-		int c = dices.size();
 		List<Dice> diceslist = new ArrayList<Dice>(dices.values());
 		Collections.sort(diceslist);
 		Iterator<Dice> iter = diceslist.listIterator();
@@ -121,6 +146,11 @@ public class GameHelper {
 		return false;
 	}
 
+	/**
+	 * Check if dices values give a SmallStreet accepted sequences are 1,2,3,4 or 2,3,4,5 or 3,4,5,6
+	 * @param dices are a Map with all Dice Objects
+	 * @return true if SmallStreet or false isnt
+	 */
 	public static boolean isSmallStreet(Map<String, Dice> dices) {
 		List<Dice> diceslist = new ArrayList<Dice>(dices.values());
 		Collections.sort(diceslist);
@@ -148,7 +178,12 @@ public class GameHelper {
 		}
 		return false;
 	}
-
+	
+	/**
+	 * Check if dices values give a BigStreet accepted sequences are 1,2,3,4,5 or 2,3,4,5,6
+	 * @param dices are a Map with all Dice Objects
+	 * @return true if BigStreet or false isnt
+	 */
 	public static boolean isBigStreet(Map<String, Dice> dices) {
 		List<Dice> diceslist = new ArrayList<Dice>(dices.values());
 		Collections.sort(diceslist);

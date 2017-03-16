@@ -8,6 +8,12 @@ import java.util.List;
 import java.util.Map;
 
 public class MapUtil {
+	
+	/**
+	 * Sort a Map by his values ascending
+	 * @param map a generic Map with keys and values
+	 * @return the sorted map
+	 */
 	public static <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> map) {
 		List<Map.Entry<K, V>> list = new LinkedList<Map.Entry<K, V>>(map.entrySet());
 		Collections.sort(list, new Comparator<Map.Entry<K, V>>() {
@@ -23,6 +29,11 @@ public class MapUtil {
 		return result;
 	}
 
+	/**
+	 * Sort a Map by his values descending
+	 * @param map a generic Map with keys and values
+	 * @return the sorted map
+	 */
 	public static <K, V extends Comparable<? super V>> Map<K, V> sortByValueDesc(Map<K, V> map) {
 		List<Map.Entry<K, V>> list = new LinkedList<Map.Entry<K, V>>(map.entrySet());
 		Collections.sort(list, new Comparator<Map.Entry<K, V>>() {
